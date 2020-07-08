@@ -1,0 +1,26 @@
+﻿<div class="card shadow mt-3 mb-3" style="cursor: pointer" @onclick="HandleJobClick">
+    <div class="card-body">
+        <div class="d-flex align-content-center">
+            <img width="60" height="60" src="@Job.Image" />
+            <div class="ml-3">
+                <div class="font-weight-bolder">@Job.Title</div>
+                <div class="font-weight-lighter"><a href="@Job.SubtitleUrl" onclick="event.stopPropagation();" target="_blank">@Job.Subtitle</a></div>
+                <div class="font-weight-lighter">@Job.Location | @Job.Type</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Job Job { get; set; }
+
+    [Parameter]
+    public EventCallback<Job> OnJobClick{ get; set; }
+
+    async Task HandleJobClick()
+    {
+        await OnJobClick.InvokeAsync(Job);
+    }
+
+}

@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "JOBBOARD_CLIENT_URI": "https://bing.com",
+    "JOBBOARD_API_URI": "http://localhost:7071/"
+  }
+}

@@ -1,0 +1,56 @@
+﻿@page "/"
+
+<div class="mt-5 py-5 text-center">
+    <h1>Find Your Dream Job</h1>
+    <p class="small mt-3">A list of jobs available.</p>
+</div>
+
+@if (isBusy)
+{
+    <p>
+        <Spinner />
+    </p>
+}
+else
+{
+    <div class="row mt-3">
+        <div class="col-md-10">
+            <RadzenTextBox Placeholder="Search..." @oninput="@(args => OnSearchQueryChange(args.Value.ToString()))" Style="width:100%" />
+        </div>
+        <div class="col-md-2">
+            <RadzenButton Text="Search" Style="width:100%" Click="SearchJobs" ButtonStyle="ButtonStyle.Secondary"></RadzenButton>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value="selectedLocations" Multiple="true" Placeholder="Select locations..." Data="@locations"
+                            Style="width: 100%" Change="JobFilterChanged" />
+        </div>
+        <div class="col-md-6">
+            <RadzenDropDown AllowClear="true" AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            @bind-Value="selectedTypes" Multiple="true" Placeholder="Select job types..." Data="@types"
+                            Style="width: 100%" Change="JobFilterChanged" />
+        </div>
+    </div>
+    if (isJobsLoading)
+    {
+        <Spinner />
+    }
+    else
+    {
+        if (jobs.Count == 0)
+        {
+            <p class="mt-5">
+                <div class="alert alert-info text-center">
+                    No jobs found.
+                </div>
+            </p>
+        }
+        foreach (var job in jobs)
+        {
+            <JobCard Job="@job" OnJobClick="ShowJob" />
+        }
+    }
+
+}

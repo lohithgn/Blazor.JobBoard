@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json.schemastore.org/proxies",
+  "proxies": {
+    "Web-PWA": {
+      "matchCondition": {
+        "route": "/service-worker.js"
+      },
+      "backendUri": "%JOBBOARD_CLIENT_URI%/service-worker.js",
+      "responseOverrides": {
+        "response.headers.Content-Type": "application/javascript"
+      }
+    },
+    "Web": {
+      "matchCondition": {
+        "route": "/{*path}"
+      },
+      "backendUri": "%JOBBOARD_CLIENT_URI%{path}"
+    },
+    "Api": {
+      "matchCondition": {
+        "route": "/api/{*path}"
+      },
+      "backendUri": "%JOBBOARD_API_URI%api/{path}"
+    }
+  }
+}

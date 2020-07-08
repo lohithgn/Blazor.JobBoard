@@ -1,0 +1,27 @@
+﻿
+<div class="row">
+    <div class="col-md-10">
+        <div class="d-flex align-content-center">
+            <img width="60" height="60" src="@Job.Image" />
+            <div class="ml-3">
+                <div class="font-weight-bolder">@Job.Title</div>
+                <div class="font-weight-lighter small"><a href="@Job.SubtitleUrl" target="_blank">@Job.Subtitle</a></div>
+                <div class="font-weight-lighter small">@Job.Location | @Job.Type</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-dark" target="_blank" href="@Job.CallToActionUrl">View Job</a>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-md-12 small" style=" white-space: pre-line; ">
+        @((MarkupString)Job.Description)
+    </div>
+
+</div>
+
+@code
+{
+    [Parameter] public Job Job { get; set; }
+}
